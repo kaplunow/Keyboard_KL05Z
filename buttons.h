@@ -4,6 +4,6 @@
 #include "MKL05Z4.h"
 
 void buttons_Init(void);
-uint32_t get_button(void);
+uint8_t get_button(void);
 	
 #endif  /* BUTTONS_H */
