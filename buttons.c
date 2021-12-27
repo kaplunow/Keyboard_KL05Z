@@ -21,10 +21,14 @@ static uint8_t is_button_pressed(void);
 void PORTA_IRQHandler() {
 	if(PORTA->ISFR & (1 << ROW1)) {																		/* Check which row caused intterupt  */
 		PORTA->PCR[ROW1] |= PORT_PCR_ISF_MASK;													/* Interrupt mask clear*/
+		row_flag = 4;																										
+	}
+	else if(PORTA->ISFR & (1 << ROW2)) {												  		
+		PORTA->PCR[ROW2] |= PORT_PCR_ISF_MASK;													/* Interrupt mask clear*/
 		row_flag = 3;
 	}
-	else if(PORTA->ISFR & (1 << ROW2)) {												  		/* Check which row caused intterupt  */
-		PORTA->PCR[ROW2] |= PORT_PCR_ISF_MASK;													/* Interrupt mask clear*/
+	else if(PORTA->ISFR & (1 << ROW3)) {												  		
+		PORTA->PCR[ROW3] |= PORT_PCR_ISF_MASK;													/* Interrupt mask clear*/
 		row_flag = 2;
 	}
 }
@@ -35,35 +39,35 @@ uint8_t get_button() {
 		return button;
 	
 	else {
-		
+				
 		FPTA->PSOR |= (1 << COL2) | (1 << COL3) | (1 << COL4);					/* Clear COL1, Set others*/
 		DELAY(5)																												/* Wait for pin state change and debouncing */
-		if( is_button_pressed() )																/* Check if COL1 */
-			button = 4 + (4*row_flag);
+		if( is_button_pressed() )															        	/* Check if COL1 */
+			button = 4 + (4*(row_flag-1));
 		else {
 			FPTA->PSOR |= (1 << COL1);					  				/* Set COL1*/
 			FPTA->PCOR |= (1 << COL2);										/* Clear COL2 */
 			DELAY(5)																	    /* Wait for pin state change and debouncing */
 			if( is_button_pressed() )											/* Check if COL2 */
-						button = 3 + (4*row_flag);
+						button = 3 + (4*(row_flag-1));
 			else {
 				FPTA->PSOR |= (1 << COL2);					  		/* Set COL2*/
 				FPTA->PCOR |= (1 << COL3);								/* Clear COL3 */
 				DELAY(5)																	/* Wait for pin state change and debouncing */
-				if( is_button_pressed() )					/* Check if COL3 */
-					button = 2 + (4*row_flag);
+				if( is_button_pressed() )									/* Check if COL3 */
+					button = 2 + (4*(row_flag-1));
 				else {
 					FPTA->PSOR |= (1 << COL3);					  		/* Set COL3*/
 					FPTA->PCOR |= (1 << COL4);								/* Clear COL4 */
 					DELAY(5)																	/* Wait for pin state change and debouncing */
-					if( is_button_pressed() )					/* Check if COL4 */
-						button = 1 + (4*row_flag);
+					if( is_button_pressed() )									/* Check if COL4 */
+						button = 1 + (4*(row_flag-1));
 				}
 			}
 		}
 		
 		FPTA->PCOR |= (1 << COL1) | (1 << COL2) | (1 << COL3) | (1 << COL4);		/* Clear all columns */
-		row_flag = 0;																														/* Clear interrupt flag*/
+		row_flag = 0;																														/* Clear interrupt row flag*/
 		return button;
 	
 	}
@@ -71,7 +75,8 @@ uint8_t get_button() {
 
 uint8_t is_button_pressed() {
 	return ( (FPTA->PDIR & (1<<ROW1)) == 0 ||
-					 (FPTA->PDIR & (1<<ROW2)) == 0	
+					 (FPTA->PDIR & (1<<ROW2)) == 0 ||
+					 (FPTA->PDIR & (1<<ROW3)) == 0
 					)? 1 : 0;				
 }
 
@@ -92,7 +97,7 @@ void row_Init() {
 	PORTA->PCR[ROW2] |=  PORT_PCR_PE_MASK |	PORT_PCR_PS_MASK;
 	PORTA->PCR[ROW2] |=  PORT_PCR_IRQC(10);														
 	PORTA->PCR[ROW3] |=  PORT_PCR_PE_MASK |	PORT_PCR_PS_MASK;
-	//PORTA->PCR[ROW3] |=  PORT_PCR_IRQC(10);														
+	PORTA->PCR[ROW3] |=  PORT_PCR_IRQC(10);														
 	PORTA->PCR[ROW4] |=  PORT_PCR_PE_MASK |	PORT_PCR_PS_MASK;
 	//PORTA->PCR[ROW4] |=  PORT_PCR_IRQC(10);														
 
