@@ -2,14 +2,14 @@
 #include "frdm_bsp.h"
 
 #define COL1 		6
-#define COL2		7
+#define COL2		5
 #define COL3		8
 #define COL4		9
 
 #define ROW1	10	
 #define ROW2	11
 #define ROW3	12
-#define ROW4	0
+#define ROW4	7
 
 static uint8_t row_flag = 0;
 static uint8_t button = 0;
@@ -30,6 +30,10 @@ void PORTA_IRQHandler() {
 	else if(PORTA->ISFR & (1 << ROW3)) {												  		
 		PORTA->PCR[ROW3] |= PORT_PCR_ISF_MASK;													/* Interrupt mask clear*/
 		row_flag = 2;
+	}
+	else if(PORTA->ISFR & (1 << ROW4)) {												  		
+		PORTA->PCR[ROW4] |= PORT_PCR_ISF_MASK;													/* Interrupt mask clear*/
+		row_flag = 1;
 	}
 }
 
@@ -76,7 +80,8 @@ uint8_t get_button() {
 uint8_t is_button_pressed() {
 	return ( (FPTA->PDIR & (1<<ROW1)) == 0 ||
 					 (FPTA->PDIR & (1<<ROW2)) == 0 ||
-					 (FPTA->PDIR & (1<<ROW3)) == 0
+					 (FPTA->PDIR & (1<<ROW3)) == 0 ||
+					 (FPTA->PDIR & (1<<ROW4)) == 0
 					)? 1 : 0;				
 }
 
@@ -99,11 +104,11 @@ void row_Init() {
 	PORTA->PCR[ROW3] |=  PORT_PCR_PE_MASK |	PORT_PCR_PS_MASK;
 	PORTA->PCR[ROW3] |=  PORT_PCR_IRQC(10);														
 	PORTA->PCR[ROW4] |=  PORT_PCR_PE_MASK |	PORT_PCR_PS_MASK;
-	//PORTA->PCR[ROW4] |=  PORT_PCR_IRQC(10);														
+	PORTA->PCR[ROW4] |=  PORT_PCR_IRQC(10);											
 
 	/* ARM's Nested Vector Interrupt Controller configuration */
-	NVIC_ClearPendingIRQ(PORTA_IRQn);				/* Clear NVIC any pending interrupts on PORTC_B */
-	NVIC_EnableIRQ(PORTA_IRQn);							/* Enable NVIC interrupts source for PORTC_B module */
+	NVIC_ClearPendingIRQ(PORTA_IRQn);				/* Clear NVIC any pending interrupts on PORTC_A */
+	NVIC_EnableIRQ(PORTA_IRQn);							/* Enable NVIC interrupts source for PORTC_A module */
 	
 	NVIC_SetPriority (PORTA_IRQn, 3);			  /* Set POR_B interrupt priority level  */ 
 	
