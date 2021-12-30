@@ -423,6 +423,16 @@
               <FileType>5</FileType>
               <FilePath>.\frdm_bsp.h</FilePath>
             </File>
+            <File>
+              <FileName>tpm.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\tpm.h</FilePath>
+            </File>
+            <File>
+              <FileName>tpm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\tpm.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
