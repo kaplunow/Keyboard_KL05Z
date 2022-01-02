@@ -137,3 +137,7 @@ void column_Init() {
 	FPTA->PCOR |= (1 << COL1) | (1 << COL2) | (1 << COL3) | (1 << COL4);
 	
 }
+
+void set_button(uint8_t new_button) {
+	button = new_button;
+}

@@ -1,6 +1,7 @@
 #include "lcd1602.h"
 #include "buttons.h"
 #include "tpm.h"
+#include "tone.h"
 #include <stdio.h>
 
 //void LED_Init() {
@@ -19,9 +20,28 @@ int main()
 	while (1)
 	{
 		char str[50];
-		sprintf(str, "Button=%d", get_button());
+		uint8_t button = get_button();
+		sprintf(str, "Button=%d", button);
 		LCD1602_ClearAll();
 		LCD1602_Print(str);
-		DELAY(100)
+		
+		if (button == 1)
+			TPM0_Tone(C4);
+		else if (button == 2)
+			TPM0_Tone(D4);
+		else if (button == 3)
+			TPM0_Tone(E4);
+		else if (button == 4)
+			TPM0_Tone(F4);
+		else if (button == 5)
+			TPM0_Tone(G4);
+		else if (button == 6)
+			TPM0_Tone(A4);
+		else if (button == 7)
+			TPM0_Tone(B4);
+		else if (button == 8)
+			TPM0_Tone(C5);
+		else 
+			DELAY(100)
 	}
 }

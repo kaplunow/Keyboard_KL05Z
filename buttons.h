@@ -5,5 +5,6 @@
 
 void buttons_Init(void);
 uint8_t get_button(void);
+void set_button(uint8_t new_button);
 	
 #endif  /* BUTTONS_H */
