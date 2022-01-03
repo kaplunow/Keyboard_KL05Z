@@ -438,6 +438,11 @@
               <FileType>5</FileType>
               <FilePath>.\tone.h</FilePath>
             </File>
+            <File>
+              <FileName>tone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\tone.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

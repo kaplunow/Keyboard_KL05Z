@@ -27,13 +27,13 @@ void TPM0_Start() {
 }
 
 void TPM0_Stop() {
-	TPM0->SC &= ~TPM_SC_CMOD(3);								/* Disable counter */
+	TPM0->SC &= ~TPM_SC_CMOD(3);							/* Disable counter */
 }
 
 void TPM0_Tone(enum e_tone tone) {
 	TPM0_Start();
 	TPM0->MOD = tone;
 	set_button(0);
-	DELAY(250)
+	DELAY(200)
 	TPM0_Stop();
 }
