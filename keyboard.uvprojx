@@ -424,16 +424,6 @@
               <FilePath>.\frdm_bsp.h</FilePath>
             </File>
             <File>
-              <FileName>tpm.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\tpm.h</FilePath>
-            </File>
-            <File>
-              <FileName>tpm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\tpm.c</FilePath>
-            </File>
-            <File>
               <FileName>tone.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\tone.h</FilePath>
@@ -442,6 +432,26 @@
               <FileName>tone.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\tone.c</FilePath>
+            </File>
+            <File>
+              <FileName>dac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\dac.c</FilePath>
+            </File>
+            <File>
+              <FileName>dac.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\dac.h</FilePath>
+            </File>
+            <File>
+              <FileName>pit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\pit.c</FilePath>
+            </File>
+            <File>
+              <FileName>pit.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\pit.h</FilePath>
             </File>
           </Files>
         </Group>
