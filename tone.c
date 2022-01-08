@@ -1,4 +1,5 @@
 #include "tone.h"
+#include <string.h>
 
 enum e_tone get_tone(uint8_t button) {
 		switch (button) {
@@ -18,7 +19,7 @@ enum e_tone get_tone(uint8_t button) {
 		case 14: return A5;
 		case 15: return B5;
 		case 16: return C6;
-		default: return NULL;
+		default: return E_NULL;
 	}		
 }
 
@@ -37,7 +38,7 @@ const char* tone2str(enum e_tone tone) {
 		case AS4: return "AS4";
 		case B4:  return "B4";
 		case C5:  return "C5";
-		case CS5: return "CS4";
+		case CS5: return "CS5";
 		case D5:  return "D5";
 		case DS5: return "DS5";
 		case E5:  return "E5";
@@ -49,7 +50,36 @@ const char* tone2str(enum e_tone tone) {
 		case AS5: return "AS5";
 		case B5:  return "B5";
 		case C6:  return "C6";
-		case NULL: return "0";
+		case E_NULL: return "NULL";
 	}
 	return "0";
+}
+
+enum e_tone str2tone(const char* str) {
+	if (strcmp(str, "C4") == 0) 			 return C4;
+	else if (strcmp(str, "CS4") == 0)  return CS4;
+	else if (strcmp(str, "D4") == 0)   return D4;
+	else if (strcmp(str, "DS4") == 0)  return DS4;
+	else if (strcmp(str, "E4") == 0)   return E4;
+	else if (strcmp(str, "F4") == 0)   return F4;
+	else if (strcmp(str, "FS4") == 0)  return FS4;
+	else if (strcmp(str, "G4") == 0)   return G4;
+	else if (strcmp(str, "GS4") == 0)  return GS4;
+	else if (strcmp(str, "A4") == 0)   return A4;
+	else if (strcmp(str, "AS4") == 0)  return AS4;
+	else if (strcmp(str, "B4") == 0)   return B4;
+	else if (strcmp(str, "C5") == 0)   return C5;
+	else if (strcmp(str, "CS5") == 0)  return CS5;
+	else if (strcmp(str, "D5") == 0)   return D5;
+	else if (strcmp(str, "DS5") == 0)  return DS5;
+	else if (strcmp(str, "E5") == 0)   return E5;
+	else if (strcmp(str, "F5") == 0)   return F5;
+	else if (strcmp(str, "FS5") == 0)  return FS5;
+	else if (strcmp(str, "G5") == 0)   return G5;
+	else if (strcmp(str, "GS5") == 0)  return GS5;
+	else if (strcmp(str, "A5") == 0)   return A5;
+	else if (strcmp(str, "AS5") == 0)  return AS4;
+	else if (strcmp(str, "B5") == 0)   return B5;
+	else if (strcmp(str, "C6") == 0)   return C6;
+	else 														   return E_NULL;
 }

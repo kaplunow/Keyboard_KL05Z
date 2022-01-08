@@ -1,5 +1,6 @@
 #include "dac.h"
 #include "pit.h"
+#include "frdm_bsp.h"
 
 void DAC_Init(void) {
 	SIM->SCGC6 |= SIM_SCGC6_DAC0_MASK;          /* Clock enable */
@@ -24,6 +25,10 @@ void DAC_Tone(enum e_tone tone, uint32_t time_ms) {
 	float samples = sizeof(values)/sizeof(values[0]);
 	
 	float freq = tone;
+	if (freq == 1) {
+		DELAY(time_ms)
+		return;
+	}
 	float delay = 1000000.0f / (freq * samples);
 	
 	float time = time_ms * freq / 1000.0f;
@@ -35,4 +40,5 @@ void DAC_Tone(enum e_tone tone, uint32_t time_ms) {
 			delay_us((uint32_t)delay);
 		}
 	}
+	DELAY(100)
 }

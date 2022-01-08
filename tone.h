@@ -30,11 +30,12 @@ enum e_tone {
 	AS5 = 923,					/* 932 Hz */
 	B5 = 988,				   	/* 988 Hz */
 	C6 = 1047,					/* 1047 Hz */
-	NULL = 0
+	E_NULL = 1
 };
 
 
 enum e_tone get_tone(uint8_t button);
 const char* tone2str(enum e_tone tone);
-
+enum e_tone str2tone(const char* str);
+	
 #endif  /* TONE_H */
