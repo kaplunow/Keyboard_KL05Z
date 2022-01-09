@@ -25,7 +25,7 @@ void DAC_Tone(enum e_tone tone, uint32_t time_ms) {
 	float samples = sizeof(values)/sizeof(values[0]);
 	
 	float freq = tone;
-	if (freq == 1) {
+	if (freq == 0) {
 		DELAY(time_ms)
 		return;
 	}

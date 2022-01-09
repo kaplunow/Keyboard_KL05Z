@@ -56,30 +56,34 @@ const char* tone2str(enum e_tone tone) {
 }
 
 enum e_tone str2tone(const char* str) {
-	if (strcmp(str, "C4") == 0) 			 return C4;
-	else if (strcmp(str, "CS4") == 0)  return CS4;
-	else if (strcmp(str, "D4") == 0)   return D4;
-	else if (strcmp(str, "DS4") == 0)  return DS4;
-	else if (strcmp(str, "E4") == 0)   return E4;
-	else if (strcmp(str, "F4") == 0)   return F4;
-	else if (strcmp(str, "FS4") == 0)  return FS4;
-	else if (strcmp(str, "G4") == 0)   return G4;
-	else if (strcmp(str, "GS4") == 0)  return GS4;
-	else if (strcmp(str, "A4") == 0)   return A4;
-	else if (strcmp(str, "AS4") == 0)  return AS4;
-	else if (strcmp(str, "B4") == 0)   return B4;
-	else if (strcmp(str, "C5") == 0)   return C5;
-	else if (strcmp(str, "CS5") == 0)  return CS5;
-	else if (strcmp(str, "D5") == 0)   return D5;
-	else if (strcmp(str, "DS5") == 0)  return DS5;
-	else if (strcmp(str, "E5") == 0)   return E5;
-	else if (strcmp(str, "F5") == 0)   return F5;
-	else if (strcmp(str, "FS5") == 0)  return FS5;
-	else if (strcmp(str, "G5") == 0)   return G5;
-	else if (strcmp(str, "GS5") == 0)  return GS5;
-	else if (strcmp(str, "A5") == 0)   return A5;
-	else if (strcmp(str, "AS5") == 0)  return AS4;
-	else if (strcmp(str, "B5") == 0)   return B5;
-	else if (strcmp(str, "C6") == 0)   return C6;
-	else 														   return E_NULL;
+	
+	char temp[3];
+	strncpy(temp, str, 2);
+	
+	if (strcmp(temp, "C4") == 0) 			  return C4;
+	else if (strcmp(temp, "CS4") == 0)  return CS4;
+	else if (strcmp(temp, "D4") == 0)   return D4;
+	else if (strcmp(temp, "DS4") == 0)  return DS4;
+	else if (strcmp(temp, "E4") == 0)   return E4;
+	else if (strcmp(temp, "F4") == 0)   return F4;
+	else if (strcmp(temp, "FS4") == 0)  return FS4;
+	else if (strcmp(temp, "G4") == 0)   return G4;
+	else if (strcmp(temp, "GS4") == 0)  return GS4;
+	else if (strcmp(temp, "A4") == 0)   return A4;
+	else if (strcmp(temp, "AS4") == 0)  return AS4;
+	else if (strcmp(temp, "B4") == 0)   return B4;
+	else if (strcmp(temp, "C5") == 0)   return C5;
+	else if (strcmp(temp, "CS5") == 0)  return CS5;
+	else if (strcmp(temp, "D5") == 0)   return D5;
+	else if (strcmp(temp, "DS5") == 0)  return DS5;
+	else if (strcmp(temp, "E5") == 0)   return E5;
+	else if (strcmp(temp, "F5") == 0)   return F5;
+	else if (strcmp(temp, "FS5") == 0)  return FS5;
+	else if (strcmp(temp, "G5") == 0)   return G5;
+	else if (strcmp(temp, "GS5") == 0)  return GS5;
+	else if (strcmp(temp, "A5") == 0)   return A5;
+	else if (strcmp(temp, "AS5") == 0)  return AS4;
+	else if (strcmp(temp, "B5") == 0)   return B5;
+	else if (strcmp(temp, "C6") == 0)   return C6;
+	else 														    return E_NULL;
 }

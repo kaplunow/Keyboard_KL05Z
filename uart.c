@@ -1,4 +1,7 @@
 #include "uart.h"
+#include "dac.h"
+#include <string.h>
+#include <stdlib.h>
 
 #define CLK_DIS 					0x00
 #define MCGFLLCLK 				0x01				/* MCGFLLCLK=41943040Hz (CLOCK_SETUP=0) */
@@ -8,6 +11,27 @@
 #define UART0_TX 					1
 #define UART0_RX 					2
 
+char rx_buf[16];
+uint8_t rx_buf_pos=0;
+uint8_t rx_FULL=0;
+
+void UART0_IRQHandler(void);
+static void play_mem(void);
+
+
+void UART0_IRQHandler() {
+	if(UART0->S1 & UART0_S1_RDRF_MASK) {		/* If data recived */
+		char temp = UART0->D;											/* Read the buffer and clear RDRF flag*/
+		if(!rx_FULL) {
+			if(temp!=LF) {											/* Check for '\n' */
+				rx_buf[rx_buf_pos] = temp;	
+				rx_buf_pos++;
+			}
+			else 
+				rx_FULL=1;
+		}
+	}
+}
 
 void UART_Init(void) {
 	SIM->SCGC4 |= SIM_SCGC4_UART0_MASK;										/* Enable clock to PIT module */
@@ -25,4 +49,47 @@ void UART_Init(void) {
 	UART0->C2 |= (UART0_C2_TE_MASK | UART0_C2_RE_MASK);		/* Transmitter and receiver enable*/
 	NVIC_EnableIRQ(UART0_IRQn);														/* NVIC UART0 interruprs enable */
 	NVIC_ClearPendingIRQ(UART0_IRQn);
+}
+
+void UART_play() {
+	
+	static int pos = 0;
+	char tones[20][2];
+  char lengths[20][4];
+	
+	if(rx_FULL) {		
+
+		if (strcmp(rx_buf, "play") == 0) {
+			if (pos == 0) 
+				play_mem();
+			else {
+				for (int i = 0; i < pos; i++)
+					DAC_Tone(str2tone(tones[i]), atoi(lengths[i]));
+			}
+		}
+		
+		else if (strcmp(rx_buf, "reset") == 0)
+			pos = 0;
+			
+		else {
+			const char* token = strtok(rx_buf, " \n");				
+			strcpy(tones[pos], token);
+			token = strtok(NULL, " ");
+			strcpy(lengths[pos], token);	
+			pos++;
+		}
+
+		rx_buf_pos=0;
+		memset(rx_buf, 0, sizeof rx_buf);
+		rx_FULL=0;
+	}
+}
+
+void play_mem() {
+	#define notes 8
+	
+	char tones[notes][2] = {"C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"};
+	char lenghts[notes][4] = {"100", "100", "100", "100", "100", "100", "100", "100"};
+	for (int i = 0; i < notes; i++)
+		DAC_Tone(str2tone(tones[i]), atoi(lenghts[i]));
 }
