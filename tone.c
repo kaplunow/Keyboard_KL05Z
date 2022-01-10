@@ -60,6 +60,9 @@ enum e_tone str2tone(const char* str) {
 	char temp[3];
 	strncpy(temp, str, 2);
 	
+	if (temp[1] == 'S')
+		strncpy(temp, str, 3);	
+	
 	if (strcmp(temp, "C4") == 0) 			  return C4;
 	else if (strcmp(temp, "CS4") == 0)  return CS4;
 	else if (strcmp(temp, "D4") == 0)   return D4;

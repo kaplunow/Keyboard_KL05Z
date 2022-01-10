@@ -54,7 +54,7 @@ void UART_Init(void) {
 void UART_play() {
 	
 	static int pos = 0;
-	char tones[20][2];
+	char tones[20][3];
   char lengths[20][4];
 	
 	if(rx_FULL) {		
@@ -86,10 +86,10 @@ void UART_play() {
 }
 
 void play_mem() {
-	#define notes 8
+	#define notes 15
 	
-	char tones[notes][2] = {"C4", "D4", "E4", "F4", "G4", "A4", "B4", "C5"};
-	char lenghts[notes][4] = {"100", "100", "100", "100", "100", "100", "100", "100"};
+	char tones[notes][3] = {"DS4", "E4", "F4", "FS4", "G4", "GS4", "A4", "AS4", "B4", "C5", "CS5", "D5", "DS5", "E5"};
+	char lenghts[notes][4] = {"200", "200", "200", "200", "200", "200", "200", "200", "200", "200", "200", "200", "200", "200", "200"};
 	for (int i = 0; i < notes; i++)
 		DAC_Tone(str2tone(tones[i]), atoi(lenghts[i]));
 }

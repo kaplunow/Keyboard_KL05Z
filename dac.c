@@ -29,7 +29,8 @@ void DAC_Tone(enum e_tone tone, uint32_t time_ms) {
 		DELAY(time_ms)
 		return;
 	}
-	float delay = 1000000.0f / (freq * samples);
+	
+	float delay = 1000000 / (freq * samples);
 	
 	float time = time_ms * freq / 1000.0f;
 	if (time < 1) time = 1;
