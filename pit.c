@@ -6,7 +6,7 @@ void PIT_Init(){
 }
 
 void delay_us(uint32_t us) {
-	uint32_t val = us * 20;
+	uint32_t val = us * 19;
 	PIT->CHANNEL[0].LDVAL = PIT_LDVAL_TSV(0xFFFF);		/* Load max value */
 	PIT->CHANNEL[0].TCTRL &= ~PIT_TCTRL_TEN_MASK;			/* Timer disable */
 	PIT->CHANNEL[0].TCTRL |= PIT_TCTRL_TEN_MASK;			/* Timer enable */

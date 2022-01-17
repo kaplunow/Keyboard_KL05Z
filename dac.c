@@ -21,7 +21,7 @@ uint8_t DAC_Load_Trig(uint16_t load) {
 
 void DAC_Tone(enum e_tone tone, uint32_t time_ms) {
 	
-	uint16_t values[16] = {2048,3072,3502,3810,4095,3810,3502,3072,2048,1024,594,287,0,287,594,1024};
+	uint16_t values[32] = {2048,2447,2830,3184,3481,3747,3932,4055,4095,4055,3932,3747,3481,3184,2830,2447,2048,1648,1269,921,614,348,163,41,0,41,163,348,614,921,1269,1648};
 	float samples = sizeof(values)/sizeof(values[0]);
 	
 	float freq = tone;
