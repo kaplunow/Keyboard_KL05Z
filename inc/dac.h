@@ -15,8 +15,14 @@
 #include "frdm_bsp.h"
 #include "tone.h"
 
+
 void DAC_Init(void);
 uint8_t DAC_Load_Trig(uint16_t load);
 void DAC_Tone(enum e_tone tone, uint32_t time_ms);
+void DAC_Tone_tri(enum e_tone tone, uint32_t time_ms);
+void DAC_Tone_sawtooth(enum e_tone tone, uint32_t time_ms);
+void DAC_Tone_sq(enum e_tone tone, uint32_t time_ms);
+void DAC_Tone_semisine(enum e_tone tone, uint32_t time_ms);
+
 
 #endif /* DAC_H */

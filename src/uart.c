@@ -92,7 +92,18 @@ void UART_play() {
 		
 		else if (strcmp(rx_buf, "reset") == 0)
 			pos = 0;
-		
+		else if (strcmp(rx_buf, "reset") == 0)
+			pos = 0;
+		else if (strcmp(rx_buf, "square") == 0)
+			DAC_Tone_sq(C5, 1000);
+		else if (strcmp(rx_buf, "triangle") == 0)
+			DAC_Tone_tri(C5, 1000);
+		else if (strcmp(rx_buf, "sawtooth") == 0)			
+			DAC_Tone_sawtooth(C5, 1000);			
+		else if (strcmp(rx_buf, "semisine") == 0)			
+			DAC_Tone_semisine(C4, 1000);			
+		else if (strcmp(rx_buf, "sinus") == 0)			
+				DAC_Tone(C5, 1000);			
 		else {																						/* Add note to the buffers (notes and lenghts)*/
 			const char* token = strtok(rx_buf, " \n");				
 			strcpy(tones[pos], token);

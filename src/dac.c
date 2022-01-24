@@ -68,3 +68,103 @@ void DAC_Tone(enum e_tone tone, uint32_t time_ms) {
 	}
 	DELAY(80)																					/* Short delay between notes */
 }
+
+void DAC_Tone_tri(enum e_tone tone, uint32_t time_ms) {
+	
+	uint16_t values[32] = {1,256,512,768,1024,1280,1536,1792,2048,2303,2559,2815,3071,3327,3583,3839,4095,3839,3583,3327,3071,2815,2559,2303,2048,1792,1536,1280,1024,768,512,256};
+	float samples = sizeof(values)/sizeof(values[0]);
+	
+	float freq = tone;
+	if (freq == 0) {
+		DELAY(time_ms)
+		return;
+	}
+	
+	float delay = 1000000 / (freq * samples);
+	
+	float time = time_ms * freq / 1000.0f;
+	if (time < 1) time = 1;
+	
+	for (int i = 0; i < (int)time; i++) {
+		for(int i = 0; i < samples ; i++) {
+			DAC_Load_Trig(values[i]);
+			delay_us((uint32_t)delay);
+		}
+	}
+	DELAY(100)
+}
+
+void DAC_Tone_sawtooth(enum e_tone tone, uint32_t time_ms) {
+	
+	uint16_t values[32] = {128,256,384,512,640,768,895,1024,1152,1280,1408,1536,1664,1792,1920,2048,2175,2303,2431,2559,2687,2815,2943,3071,3200,3327,3455,3583,3711,3839,3967,4095};
+	float samples = sizeof(values)/sizeof(values[0]);
+	
+	float freq = tone;
+	if (freq == 0) {
+		DELAY(time_ms)
+		return;
+	}
+	
+	float delay = 1000000 / (freq * samples);
+	
+	float time = time_ms * freq / 1000.0f;
+	if (time < 1) time = 1;
+	
+	for (int i = 0; i < (int)time; i++) {
+		for(int i = 0; i < samples ; i++) {
+			DAC_Load_Trig(values[i]);
+			delay_us((uint32_t)delay);
+		}
+	}
+	DELAY(100)
+}
+
+void DAC_Tone_sq(enum e_tone tone, uint32_t time_ms) {
+	
+	uint16_t values[32] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4095,4095,4095,4095,4095,4095,4095,4095,4095,4095,4095,4095,4095,4095,4095,4095};
+	float samples = sizeof(values)/sizeof(values[0]);
+	
+	float freq = tone;
+	if (freq == 0) {
+		DELAY(time_ms)
+		return;
+	}
+	
+	float delay = 1000000 / (freq * samples);
+	
+	float time = time_ms * freq / 1000.0f;
+	if (time < 1) time = 1;
+	
+	for (int i = 0; i < (int)time; i++) {
+		for(int i = 0; i < samples ; i++) {
+			DAC_Load_Trig(values[i]);
+			delay_us((uint32_t)delay);
+		}
+	}
+	DELAY(100)
+}
+
+void DAC_Tone_semisine(enum e_tone tone, uint32_t time_ms) {
+	
+	uint16_t values[32] = {0,798,1567,2275,2895,3404,3783,4016,4095,4016,3783,3404,2895,2275,1567,798,0,798,1567,2275,2895,3404,3783,4016,4095,4016,3783,3404,2895,2275,1567,789};
+	float samples = sizeof(values)/sizeof(values[0]);
+	
+	float freq = tone;
+	if (freq == 0) {
+		DELAY(time_ms)
+		return;
+	}
+	
+	float delay = 1000000 / (freq * samples);
+	
+	float time = time_ms * freq / 1000.0f;
+	if (time < 1) time = 1;
+	
+	for (int i = 0; i < (int)time; i++) {
+		for(int i = 0; i < samples ; i++) {
+			DAC_Load_Trig(values[i]);
+			delay_us((uint32_t)delay);
+		}
+	}
+	DELAY(100)
+}
