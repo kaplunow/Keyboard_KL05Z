@@ -1,6 +1,18 @@
-#include "buttons.h"
-#include "frdm_bsp.h"
+/*******************************************************************************
+ *  This is source file for tact switch matrix usage functions.
+ *  Software is part of Keyboard_KL05Z project and it's designed for KL05Z CMSIS.
+ *******************************************************************************
+ * @file buttons.c
+ * @author Kaplunow, Lisowski
+ * @date Jan 2022
+ * @brief File containing definitions for DAC functions
+ * @ver 0.1
+ *******************************************************************************/
 
+/* Private includes ----------------------------------------------------------*/
+#include "buttons.h"
+
+/* Private defines -----------------------------------------------------------*/
 #define COL1 		6
 #define COL2		5
 #define COL3		8
@@ -11,13 +23,19 @@
 #define ROW3	12
 #define ROW4	7
 
+/* Private variables ----------------------------------------------------------*/
 static uint8_t row_flag = 0;
-static uint8_t button = 0;
+static uint8_t button = 0;				
 
+/* Private prototypes ---------------------------------------------------------*/
 static void column_Init(void);
 static void row_Init(void);
 static uint8_t is_button_pressed(void);
 
+
+/**
+ * @brief ISR for tact switch matrix. Setting corresponding flag which row caused int.
+ */
 void PORTA_IRQHandler() {
 	if(PORTA->ISFR & (1 << ROW1)) {																		/* Check which row caused intterupt  */
 		PORTA->PCR[ROW1] |= PORT_PCR_ISF_MASK;													/* Interrupt mask clear*/
@@ -36,7 +54,11 @@ void PORTA_IRQHandler() {
 		row_flag = 1;
 	}
 }
-
+/**
+ * @brief Check wich button has been pressed.
+ *
+ * @return Number of button pressed.
+ */
 uint8_t get_button() {
 	
 	if (row_flag == 0) 
@@ -76,7 +98,11 @@ uint8_t get_button() {
 	
 	}
 }
-
+/**
+ * @brief Conditions ckeck if button has been pressed.
+ *
+ * @return True/false (0/1).
+ */
 uint8_t is_button_pressed() {
 	return ( (FPTA->PDIR & (1<<ROW1)) == 0 ||
 					 (FPTA->PDIR & (1<<ROW2)) == 0 ||
@@ -84,7 +110,9 @@ uint8_t is_button_pressed() {
 					 (FPTA->PDIR & (1<<ROW4)) == 0
 					)? 1 : 0;				
 }
-
+/**
+ * @brief Row initilization
+ */
 void row_Init() {
 	
 	/* Enable clock for port A */
@@ -113,12 +141,16 @@ void row_Init() {
 	NVIC_SetPriority (PORTA_IRQn, 3);			  /* Set POR_B interrupt priority level  */ 
 	
 }
-
+/**
+ * @brief Buttons initilization.
+ */
 void buttons_Init() {
 	column_Init();
 	row_Init();
 }
-
+/**
+ * @brief Column initilization.
+ */
 void column_Init() {
 	
 	/* Clock enable to port A */
@@ -137,7 +169,11 @@ void column_Init() {
 	FPTA->PCOR |= (1 << COL1) | (1 << COL2) | (1 << COL3) | (1 << COL4);
 	
 }
-
+/**
+ * @brief Set new value to button.
+ *
+ * @param New value.
+ */
 void set_button(uint8_t new_button) {
 	button = new_button;
 }

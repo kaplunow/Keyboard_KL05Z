@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath></IncludePath>
+              <IncludePath>.\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -381,87 +381,102 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source Group 1</GroupName>
+          <GroupName>inc</GroupName>
           <Files>
-            <File>
-              <FileName>main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>buttons.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\buttons.c</FilePath>
-            </File>
             <File>
               <FileName>buttons.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\buttons.h</FilePath>
-            </File>
-            <File>
-              <FileName>lcd1602.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\lcd1602.c</FilePath>
-            </File>
-            <File>
-              <FileName>lcd1602.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\lcd1602.h</FilePath>
-            </File>
-            <File>
-              <FileName>i2c.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\i2c.c</FilePath>
-            </File>
-            <File>
-              <FileName>i2c.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\i2c.h</FilePath>
-            </File>
-            <File>
-              <FileName>frdm_bsp.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\frdm_bsp.h</FilePath>
-            </File>
-            <File>
-              <FileName>tone.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\tone.h</FilePath>
-            </File>
-            <File>
-              <FileName>tone.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\tone.c</FilePath>
-            </File>
-            <File>
-              <FileName>dac.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\dac.c</FilePath>
+              <FilePath>.\inc\buttons.h</FilePath>
             </File>
             <File>
               <FileName>dac.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\dac.h</FilePath>
+              <FilePath>.\inc\dac.h</FilePath>
             </File>
             <File>
-              <FileName>pit.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\pit.c</FilePath>
+              <FileName>frdm_bsp.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\frdm_bsp.h</FilePath>
+            </File>
+            <File>
+              <FileName>i2c.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\i2c.h</FilePath>
+            </File>
+            <File>
+              <FileName>lcd1602.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\lcd1602.h</FilePath>
             </File>
             <File>
               <FileName>pit.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\pit.h</FilePath>
+              <FilePath>.\inc\pit.h</FilePath>
             </File>
             <File>
-              <FileName>uart.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\uart.c</FilePath>
+              <FileName>tone.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\tone.h</FilePath>
             </File>
             <File>
               <FileName>uart.h</FileName>
               <FileType>5</FileType>
-              <FilePath>.\uart.h</FilePath>
+              <FilePath>.\inc\uart.h</FilePath>
+            </File>
+            <File>
+              <FileName>utils.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\utils.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>src</GroupName>
+          <Files>
+            <File>
+              <FileName>buttons.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\buttons.c</FilePath>
+            </File>
+            <File>
+              <FileName>dac.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\dac.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\i2c.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd1602.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\lcd1602.c</FilePath>
+            </File>
+            <File>
+              <FileName>pit.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\pit.c</FilePath>
+            </File>
+            <File>
+              <FileName>tone.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\tone.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\uart.c</FilePath>
+            </File>
+            <File>
+              <FileName>utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\src\main.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -510,5 +525,14 @@
       </file>
     </files>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>keyboard</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

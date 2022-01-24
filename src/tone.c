@@ -1,6 +1,24 @@
+/*******************************************************************************
+ *  This is source file for tones processing functions.
+ *  Software is part of Keyboard_KL05Z project and it's designed for KL05Z CMSIS.
+ *******************************************************************************
+ * @file tone.c
+ * @author Kaplunow, Lisowski
+ * @date Jan 2022
+ * @brief File containing definitions for tones processing functions
+ * @ver 0.1
+ *******************************************************************************/
+ 
+/* Private includes ---------------------------------------------------------*/
 #include "tone.h"
 #include <string.h>
 
+/**
+ * @brief Conversion number of button pressed to coressponding tone
+ *
+ * @param Number of button.
+ * @return Enum e_tone type of tone.
+ */
 enum e_tone get_tone(uint8_t button) {
 		switch (button) {
 		case 1: return C4;	
@@ -22,7 +40,12 @@ enum e_tone get_tone(uint8_t button) {
 		default: return E_NULL;
 	}		
 }
-
+/**
+ * @brief Conversion enum type e_tone to string(const char* ).
+ *
+ * @param Enum e_tone type.
+ * @return String.
+ */
 const char* tone2str(enum e_tone tone) {
 	switch (tone) {
 		case C4:  return "C4";
@@ -54,7 +77,12 @@ const char* tone2str(enum e_tone tone) {
 	}
 	return "0";
 }
-
+/**
+ * @brief Conversion string(const char* ) to enum type e_tone.
+ *
+ * @param String.
+ * @return Enum e_tone type.
+ */
 enum e_tone str2tone(const char* str) {
 	
 	char temp[3];

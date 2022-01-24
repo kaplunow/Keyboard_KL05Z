@@ -1,9 +1,20 @@
+/*******************************************************************************
+ *  This is source file for tones processing functions and types.
+ *  Software is part of Keyboard_KL05Z project and it's designed for KL05Z CMSIS.
+ *******************************************************************************
+ * @file tone.h
+ * @author Kaplunow, Lisowski
+ * @date Jan 2022
+ * @brief File containing declarations for tones processing functions and enum type
+ * @ver 0.1
+ *******************************************************************************/
+ 
 #ifndef TONE_H
 #define TONE_H
 
-#include "MKL05Z4.h"
+#include "frdm_bsp.h"
 
-
+/* Enum type containing calibrated frequencies for coresponding their tones */
 enum e_tone {
 	C4 = 255,				  	/* 262 Hz */
 	CS4 = 272,					/* 277 Hz */
@@ -38,4 +49,5 @@ enum e_tone get_tone(uint8_t button);
 const char* tone2str(enum e_tone tone);
 enum e_tone str2tone(const char* str);
 	
+
 #endif  /* TONE_H */
